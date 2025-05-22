@@ -4,12 +4,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 
 public class Main {
@@ -29,35 +34,35 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
+
+        JTextField text = new JTextField();
+        text.setColumns(1);
+        panel.add(text);
+        Container contentPane = frame.getContentPane();
+        contentPane.add(panel, BorderLayout.CENTER);
+
         for (int n = 0; n < 10; n++) {
             System.out.println(n);
+            Integer i = Integer.valueOf(n);
+            String str = i.toString();
 
-            JButton button0 = new JButton("0");
-            JButton button1 = new JButton("1");
-            JButton button2 = new JButton("2");
-            JButton button3 = new JButton("3");
-            JButton button4 = new JButton("4");
-            JButton button5 = new JButton("5");
-            JButton button6 = new JButton("6");
-            JButton button7 = new JButton("7");
-            JButton button8 = new JButton("8");
-            JButton button9 = new JButton("9");
-
-            panel.add(button0);
-            panel.add(button1);
-            panel.add(button2);
-            panel.add(button3);
-            panel.add(button4);
-            panel.add(button5);
-            panel.add(button6);
-            panel.add(button7);
-            panel.add(button8);
-            panel.add(button9);
-            
-            Container contentPane=frame.getContentPane();
-            contentPane.add(panel, BorderLayout.CENTER);
-
+            setButton(frame,  panel, str);
         }
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(
+                "+",
+                "-",
+                "*",
+                "/",
+                ".",
+                "=",
+                "c",
+                "del"
+        ));
+        for (String s : list) {
+            setButton(frame, panel, s);
+        }
+
+
 ////        // 画面上に表示するメッセージ
 ////        JLabel label = new JLabel("Hello World");
 ////
@@ -66,31 +71,14 @@ public class Main {
 ////
 ////        // 画面にメッセージを追加する
 ////        frame.add(label);
-//
-//        JButton button0 = new JButton("0");
-//        JButton button1 = new JButton("1");
-//        JButton button2 = new JButton("2");
-//        JButton button3 = new JButton("3");
-//        JButton button4 = new JButton("4");
-//        JButton button5 = new JButton("5");
-//        JButton button6 = new JButton("6");
-//        JButton button7 = new JButton("7");
-//        JButton button8 = new JButton("8");
-//        JButton button9 = new JButton("9");
-//
-//        panel.add(button0);
-//        panel.add(button1);
-//        panel.add(button2);
-//        panel.add(button3);
-//        panel.add(button4);
-//        panel.add(button5);
-//        panel.add(button6);
-//        panel.add(button7);
-//        panel.add(button8);
-//        panel.add(button9);
-//
-//        Container contentPane=frame.getContentPane();
-//        contentPane.add(panel, BorderLayout.CENTER);
+
+    }
+
+    private static void setButton(JFrame frame, JPanel panel, String buttonName){
+        JButton button = new JButton(buttonName);
+        panel.add(button);
+        Container contentPane = frame.getContentPane();
+        contentPane.add(panel, BorderLayout.CENTER);
     }
 
     /**
